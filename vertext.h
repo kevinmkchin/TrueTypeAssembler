@@ -879,6 +879,10 @@ vtxt_get_text_bounding_box_info(float* width_out,
         {
             if (*text < VTXT_ASCII_FROM || *text > VTXT_ASCII_TO) // Make sure we have the data for this glyph
             {
+                //TODO: If you have editable text, this means there will be a hidden character, a design decision 
+                //      should be made perhaps to coerce this to perhaps '*' or something like that.
+
+                ++text;  // Pointer is incremented to prevent string with characters out of scope creating infinite loop.
                 continue;
             }
 
